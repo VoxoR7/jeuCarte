@@ -90,11 +90,21 @@ void Paquet::melanger() {
     }
 }
 
-void Paquet::piocher( uint8_t nbCartes, Paquet paquet ) {
+void Paquet::piocher( uint8_t nbCartes, Paquet &    paquet ) {
 
-    for ( ; nbCartes ; nbCartes-- ) {
-        for ( uint8_t i = 0 ; i < 16 && tabCarte[i] != NULL ; i++ )
+    uint8_t i;
+
+    for ( uint8_t j = nbCartes ; j > 0 ; j-- ) {
+        for ( i = 0 ; i < 16 && tabCarte[i] != NULL ; i++ );
             tabCarte[i] = paquet.premiereCarte();
+    }
+}
+
+void Paquet::afficher() {
+
+    for ( uint8_t i = 0 ; i < 16 ; i++ )
+        if ( tabCarte[i] != NULL )
+            tabCarte[i]->afficher();
 }
 
 /* destructeur */
@@ -102,7 +112,8 @@ void Paquet::piocher( uint8_t nbCartes, Paquet paquet ) {
 Paquet::~Paquet() {
 
     for ( uint8_t i = 0 ; i < 16 ; i++ )
-        delete tabCarte[i];
+        if ( tabCarte[i] != NULL )
+            delete tabCarte[i];
 
     delete[] tabCarte;
 }

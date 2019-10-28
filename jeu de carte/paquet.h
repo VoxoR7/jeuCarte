@@ -1,9 +1,11 @@
+#include <iostream>
+
 #include "carte.h"
 
 #define MAIN 0
 #define CREER_CARTE 1
 
-#define NB_MELANGE 10
+#define NB_MELANGE 25
 
 class Paquet {
 
@@ -26,7 +28,11 @@ class Paquet {
         /* méthodes de modification */
 
         void melanger();
-        void piocher( uint8_t, Paquet );
+        void piocher( uint8_t, Paquet & );
+
+        /* méthodes d'affichage */
+
+        void afficher();
 
         /* destructeur */
 
